@@ -7,6 +7,7 @@ import { resolve } from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/",
   plugins: [
     vue(),
     // 按需自动引入NaiveUi组件
@@ -29,13 +30,14 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@component": "./src/component",
-      "@public": "./src/public",
-      "@assets": "./src/assets",
-      "@pages": "./src/pages",
-      "@utils": "./src/utils",
-      "@styles": "./src/assets/styles",
-      "@store": "./src/store",
+      "@components": resolve(__dirname, "src/components"),
+      "@public": resolve(__dirname, "src/public"),
+      "@assets": resolve(__dirname, "src/assets"),
+      "@pages": resolve(__dirname, "src/pages"),
+      "@utils": resolve(__dirname, "src/utils"),
+      "@styles": resolve(__dirname, "src/assets/styles"),
+      "@store": resolve(__dirname, "src/store"),
+      "@router": resolve(__dirname, "src/router"),
     },
   },
 });

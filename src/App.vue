@@ -1,8 +1,7 @@
 <script setup>
 import Header from "./components/Header.vue";
-import Footer from "./components/Footer.vue";
 import Menus from "./components/Menus.vue";
-import { ref } from "vue";
+import { RouterView } from "vue-router";
 import useMainStore from "@store/mainStore";
 const store = useMainStore();
 </script>
@@ -24,7 +23,9 @@ const store = useMainStore();
             >
               <Menus />
             </n-layout-sider>
-            <n-layout class="sf-page-container" />
+            <n-layout class="sf-page-container" >
+              <router-view></router-view>
+            </n-layout>
           </n-layout>
         </n-layout>
       </n-space>

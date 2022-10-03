@@ -1,25 +1,27 @@
 <template>
   <div class="sf-header flex-justify__between">
     <div class="left flex-alien__center">
-      <span class="sf-title">SAN-FENG</span>
+      <span class="sf-title">SaFa</span>
       <n-input-group round class="sf-global-search">
-        <n-input
-          v-model:value="globalKeyWords"
-          placeholder="搜索关键字"
-          :style="{ width: '240px' }"
-        />
+        <n-input v-model:value="globalKeyWords" placeholder="搜索关键字" :style="{ width: '240px' }" />
         <n-button type="primary" ghost @click="handleGlobalSearch">
           搜索
         </n-button>
       </n-input-group>
     </div>
     <div class="right flex-alien__center">
-      <div class="sf-message" @click="handleMessage">消息</div>
-      <n-menu
-        v-model:value="activeKey"
-        mode="horizontal"
-        :options="menuOptions"
-      />
+      <div class="sf-header-nav">创造平台</div>
+      <span class="sf-slider"></span>
+      <div class="sf-header-nav sf-message" @click="handleMessage">
+        <n-icon>
+          <MessageIcon />
+        </n-icon>消息
+      </div>
+      <div class="sf-header-nav">
+        <n-icon>
+          <AddIcon />
+        </n-icon>发视频
+      </div>
       <span class="sf-slider"></span>
       <n-switch v-model:value="inverted" @update:value="handleSetMessage" />
       <n-button type="primary" round class="sf-login" @click="handleLogin">
@@ -29,54 +31,29 @@
   </div>
   <!-- 登陆弹框 -->
   <n-modal v-model:show="showLoginModal" transform-origin="center">
-    <n-card
-      style="width: 600px"
-      title="登陆"
-      :bordered="false"
-      role="dialog"
-      aria-modal="true"
-    >
+    <n-card style="width: 600px" title="登陆" :bordered="false" role="dialog" aria-modal="true">
       <template #header-extra>
-        <n-button
-          strong
-          secondary
-          circle
-          type="primary"
-          @click="showLoginModal = false"
-        >
+        <n-button strong secondary circle type="primary" @click="showLoginModal = false">
           <template #icon>
-            <n-icon><close-icon /></n-icon>
+            <n-icon>
+              <close-icon />
+            </n-icon>
           </template>
         </n-button>
       </template>
       <!-- 登陆表单 -->
       <div class="sf-login">
         <div class="sf-login__left">
-          <n-form
-            ref="formRef"
-            :model="loginModel"
-            :rules="loginRules"
-            label-placement="left"
-            label-width="auto"
-            require-mark-placement="right-hanging"
-            :style="{
+          <n-form ref="formRef" :model="loginModel" :rules="loginRules" label-placement="left" label-width="auto"
+            require-mark-placement="right-hanging" :style="{
               maxWidth: '320px',
-            }"
-          >
+            }">
             <n-form-item path="phone">
-              <n-input
-                v-model:value="loginModel.phone"
-                placeholder="请输入手机号"
-                size="large"
-              />
+              <n-input v-model:value="loginModel.phone" placeholder="请输入手机号" size="large" />
             </n-form-item>
             <n-form-item path="inputValue">
               <n-input-group>
-                <n-input
-                  v-model:value="loginModel.authCode"
-                  placeholder="请输入验证码"
-                  size="large"
-                />
+                <n-input v-model:value="loginModel.authCode" placeholder="请输入验证码" size="large" />
                 <n-button type="primary" size="large">获取验证码</n-button>
               </n-input-group>
             </n-form-item>
@@ -91,9 +68,13 @@
       <template #footer>
         <div class="sf-other-login">
           其他方式：
-          <n-icon :size="24" color="green"><logo-wechat /></n-icon>
+          <n-icon :size="24" color="green">
+            <logo-wechat />
+          </n-icon>
           &nbsp;&nbsp;
-          <n-icon :size="24" color="blue"><logo-alipay /></n-icon>
+          <n-icon :size="24" color="blue">
+            <logo-alipay />
+          </n-icon>
         </div>
       </template>
     </n-card>
@@ -112,6 +93,8 @@ import {
   CloseOutline as CloseIcon,
   LogoWechat,
   LogoAlipay,
+  ChatbubbleEllipsesSharp as MessageIcon,
+  AddCircleSharp as AddIcon
 } from "@vicons/ionicons5";
 import useMainStore from "@store/mainStore";
 
@@ -119,72 +102,7 @@ const store = useMainStore();
 const { inverted, globalKeyWords } = storeToRefs(store);
 
 const activeKey = ref(null);
-const menuOptions = [
-  {
-    label: () =>
-      h(
-        "a",
-        {
-          href: "https://baike.baidu.com/item/%E4%B8%94%E5%90%AC%E9%A3%8E%E5%90%9F",
-          target: "_blank",
-          rel: "noopenner noreferrer",
-        },
-        "创作中心"
-      ),
-    key: "hear-the-wind-sing",
-    // icon: renderIcon(BookIcon),
-  },
 
-  {
-    label: "个人领域",
-    key: "dance-dance-dance",
-    // icon: renderIcon(BookIcon),
-    children: [
-      {
-        type: "group",
-        label: "人物",
-        key: "people",
-        children: [
-          {
-            label: "叙事者",
-            key: "narrator",
-            // icon: renderIcon(PersonIcon),
-          },
-          {
-            label: "羊男",
-            key: "sheep-man",
-            // icon: renderIcon(PersonIcon),
-          },
-        ],
-      },
-      {
-        label: "饮品",
-        key: "beverage",
-        // icon: renderIcon(WineIcon),
-        children: [
-          {
-            label: "威士忌",
-            key: "whisky",
-          },
-        ],
-      },
-      {
-        label: "食物",
-        key: "food",
-        children: [
-          {
-            label: "三明治",
-            key: "sandwich",
-          },
-        ],
-      },
-      {
-        label: "过去增多，未来减少",
-        key: "the-past-increases-the-future-recedes",
-      },
-    ],
-  },
-];
 // 显示模式切换
 const message = useMessage();
 function handleSetMessage(value) {
@@ -222,29 +140,49 @@ function handleMessage() {
   padding: 10px 20px;
   display: flex;
   place-items: center; // justify-content, align-items简写
+
   .sf-title {
     font: 800 2em "Gill Sans", sans-serif;
+    color: rgb(114, 243, 146);
   }
+
   .sf-global-search {
     width: 520px;
     margin-left: 20px;
   }
+
   .sf-login {
     margin-left: 20px;
   }
+
   .sf-slider {
     display: inline-block;
     width: 1px;
-    height: 26px;
+    height: 18px;
     background-color: #f2f2f2;
     margin: 0 10px;
   }
+
+  .sf-header-nav {
+    display: flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f1f1f1;
+    }
+  }
 }
+
 .sf-login {
   display: flex;
+
   .sf-login__left {
     width: 360px;
   }
+
   .sf-login-rignt {
     width: 240px;
   }

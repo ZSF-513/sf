@@ -30,4 +30,5 @@ body {
 
 .sf-page-container {
   min-height: calc(100vh - 80px);
+  padding: 10px;
 }
