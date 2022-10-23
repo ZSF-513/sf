@@ -1,24 +1,36 @@
 <template>
   <div class="sf-menus">
-    <div class="sf-menu-item sf-menu-item__hover" @click="onRouterLink('/home')">
+    <div
+      class="sf-menu-item sf-menu-item__hover"
+      @click="onRouterLink('/home')"
+    >
       <n-icon size="18" :component="HomeIcon" /><span>首页</span>
     </div>
-    <div class="sf-menu-item sf-menu-item__hover" @click="onRouterLink('/concern')">
+    <div
+      class="sf-menu-item sf-menu-item__hover"
+      @click="onRouterLink('/concern')"
+    >
       <n-icon size="18" :component="HeartIcon" /><span>关注</span>
     </div>
     <div class="sf-slider"></div>
-    <div class="sf-menu-item sf-menu-item__hover" @click="onRouterLink('/history')">
+    <div
+      class="sf-menu-item sf-menu-item__hover"
+      @click="onRouterLink('/history')"
+    >
       <n-icon size="18" :component="ExtensionPuzzleIcon" /><span>观看历史</span>
     </div>
-    <div class="sf-menu-item sf-menu-item__hover" @click="onRouterLink('/collection')">
+    <div
+      class="sf-menu-item sf-menu-item__hover"
+      @click="onRouterLink('/collection')"
+    >
       <n-icon size="18" :component="ThumbsIcon" /><span>收藏</span>
     </div>
     <div class="sf-slider"></div>
-    <div class="sf-menu-item"><span class="sf-text-bold">特色频道</span></div>
+    <!-- <div class="sf-menu-item"><span class="sf-text-bold">特色频道</span></div>
     <div class="sf-menu-item sf-menu-item__hover" v-for="menu of menus">
       <n-icon size="18" :component="menu.icon" />
       <span class="sf-menu-text">{{ menu.name }}</span>
-    </div>
+    </div> -->
   </div>
 </template>
 <script setup>
@@ -38,7 +50,7 @@ import {
   CarOutline as CarIcon,
   FootballOutline as FootballIcon,
   StarOutline as StarIcon,
-  LanguageOutline as LanguageIcon
+  LanguageOutline as LanguageIcon,
 } from "@vicons/ionicons5";
 import { renderIcon } from "../utils/render";
 
@@ -58,10 +70,10 @@ const menus = reactive([
 ]);
 
 // 路由跳转
-const router = useRouter()
+const router = useRouter();
 
 function onRouterLink(path) {
-  router.push({ path: path })
+  router.push({ path: path });
 }
 </script>
 <style lang="scss" scoped>

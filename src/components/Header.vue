@@ -3,24 +3,24 @@
     <div class="left flex-alien__center">
       <span class="sf-title">SaFa</span>
       <n-input-group round class="sf-global-search">
-        <n-input v-model:value="globalKeyWords" placeholder="搜索关键字" :style="{ width: '240px' }" />
+        <n-input
+          v-model:value="globalKeyWords"
+          placeholder="搜索关键字"
+          :style="{ width: '240px' }"
+        />
         <n-button type="primary" ghost @click="handleGlobalSearch">
           搜索
         </n-button>
       </n-input-group>
     </div>
     <div class="right flex-alien__center">
-      <div class="sf-header-nav">创造平台</div>
+      <div class="sf-header-nav" @click="goCreation">创造平台</div>
       <span class="sf-slider"></span>
       <div class="sf-header-nav sf-message" @click="handleMessage">
-        <n-icon>
-          <MessageIcon />
-        </n-icon>消息
+        <n-icon> <MessageIcon /> </n-icon>消息
       </div>
       <div class="sf-header-nav">
-        <n-icon>
-          <AddIcon />
-        </n-icon>发视频
+        <n-icon> <AddIcon /> </n-icon>发视频
       </div>
       <span class="sf-slider"></span>
       <n-switch v-model:value="inverted" @update:value="handleSetMessage" />
@@ -31,9 +31,21 @@
   </div>
   <!-- 登陆弹框 -->
   <n-modal v-model:show="showLoginModal" transform-origin="center">
-    <n-card style="width: 600px" title="登陆" :bordered="false" role="dialog" aria-modal="true">
+    <n-card
+      style="width: 600px"
+      title="登陆"
+      :bordered="false"
+      role="dialog"
+      aria-modal="true"
+    >
       <template #header-extra>
-        <n-button strong secondary circle type="primary" @click="showLoginModal = false">
+        <n-button
+          strong
+          secondary
+          circle
+          type="primary"
+          @click="showLoginModal = false"
+        >
           <template #icon>
             <n-icon>
               <close-icon />
@@ -44,16 +56,31 @@
       <!-- 登陆表单 -->
       <div class="sf-login">
         <div class="sf-login__left">
-          <n-form ref="formRef" :model="loginModel" :rules="loginRules" label-placement="left" label-width="auto"
-            require-mark-placement="right-hanging" :style="{
+          <n-form
+            ref="formRef"
+            :model="loginModel"
+            :rules="loginRules"
+            label-placement="left"
+            label-width="auto"
+            require-mark-placement="right-hanging"
+            :style="{
               maxWidth: '320px',
-            }">
+            }"
+          >
             <n-form-item path="phone">
-              <n-input v-model:value="loginModel.phone" placeholder="请输入手机号" size="large" />
+              <n-input
+                v-model:value="loginModel.phone"
+                placeholder="请输入手机号"
+                size="large"
+              />
             </n-form-item>
             <n-form-item path="inputValue">
               <n-input-group>
-                <n-input v-model:value="loginModel.authCode" placeholder="请输入验证码" size="large" />
+                <n-input
+                  v-model:value="loginModel.authCode"
+                  placeholder="请输入验证码"
+                  size="large"
+                />
                 <n-button type="primary" size="large">获取验证码</n-button>
               </n-input-group>
             </n-form-item>
@@ -94,9 +121,10 @@ import {
   LogoWechat,
   LogoAlipay,
   ChatbubbleEllipsesSharp as MessageIcon,
-  AddCircleSharp as AddIcon
+  AddCircleSharp as AddIcon,
 } from "@vicons/ionicons5";
 import useMainStore from "@store/mainStore";
+import { useRouter } from "vue-router";
 
 const store = useMainStore();
 const { inverted, globalKeyWords } = storeToRefs(store);
@@ -132,6 +160,15 @@ function handleLogin() {
 const showMessageModal = ref(false);
 function handleMessage() {
   showMessageModal.value = true;
+}
+
+// 创作中心
+const router = useRouter();
+function goCreation() {
+  router.push({
+    path: "/creation-center",
+  });
+  // window.open(routerUrl.href, "_blank");
 }
 </script>
 <style lang="scss" scoped>

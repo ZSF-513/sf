@@ -22,6 +22,10 @@ const routes = [
     path: "/collection",
     component: () => import("@pages/collection/index.vue"),
   },
+  {
+    path: "/creation-center",
+    component: () => import("@pages/creationCenter/index.vue"),
+  },
 ];
 
 export default createRouter({

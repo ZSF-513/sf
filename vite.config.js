@@ -38,6 +38,19 @@ export default defineConfig({
       "@styles": resolve(__dirname, "src/assets/styles"),
       "@store": resolve(__dirname, "src/store"),
       "@router": resolve(__dirname, "src/router"),
+      "@configs": resolve(__dirname, "src/configs"),
+      "@apis": resolve(__dirname, "src/apis"),
+    },
+  },
+
+  server: {
+    port: "3002",
+    proxy: {
+      "/v1": {
+        target: "http://192.168.3.9:3000",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
     },
   },
 });
