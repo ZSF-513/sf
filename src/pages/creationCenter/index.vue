@@ -2,11 +2,10 @@
   <n-space vertical>
     <div class="article-edit__head">
       <div class="sf-edit__title">
-        <h2>标题</h2>
         <n-input
           v-model:value="articleTitle"
           type="text"
-          placeholder="基本的 Input"
+          placeholder="标题"
           size="large"
         />
       </div>
@@ -17,7 +16,7 @@
       </div>
     </div>
   </n-space>
-  <h2>内容</h2>
+
   <div style="border: 1px solid #ccc">
     <Toolbar
       style="border-bottom: 1px solid #ccc"
@@ -26,7 +25,7 @@
       :mode="mode"
     />
     <Editor
-      style="height: 500px; overflow-y: hidden"
+      style="min-height: 760px; overflow-y: hidden"
       v-model="articleHtml"
       :defaultConfig="editorConfig"
       :mode="mode"
@@ -96,8 +95,14 @@ function onSubmit() {
 .article-edit__head {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
   .sf-edit__title {
     flex: 1;
+  }
+  .sf-submit {
+    width: 200px;
+    text-align: center;
   }
 }
 </style>
